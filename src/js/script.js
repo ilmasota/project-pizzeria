@@ -60,8 +60,9 @@
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
+      thisProduct.initAccordion();
 
-      console.log('new Product:', thisProduct);
+      // console.log('new Product:', thisProduct);
     }
 
     renderInMenu(){
@@ -76,6 +77,34 @@
       const menuContainer = document.querySelector(select.containerOf.menu);
       /* add DOM element to menu */
       menuContainer.appendChild(thisProduct.element);
+    }
+
+    initAccordion(){
+      const thisProduct = this;
+      console.log(thisProduct);
+      /* find the clickable trigger (the element that should react to clicking) */
+      const accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      console.log(accordionTrigger);
+      /* START: click event listener to trigger */
+      accordionTrigger.addEventListener('click', function(){
+        /* prevent default action for event */
+        event.preventDefault();
+        /* toggle active class on element of thisProduct */
+        thisProduct.element.classList.toggle('active');
+        /* find all active products */
+        const allActiveProducts = document.querySelectorAll(select.all.menuProductsActive);
+        /* START LOOP: for each active product */
+        for(let activeProduct of allActiveProducts){
+          /* START: if the active product isn't the element of thisProduct */
+          if (thisProduct.element !== activeProduct) {
+            /* remove class active for the active product */
+            activeProduct.classList.remove('active');
+            /* END: if the active product isn't the element of thisProduct */
+          }
+          /* END LOOP: for each active product */
+        }
+        /* END: click event listener to trigger */
+      });
     }
   }
 
