@@ -61,6 +61,10 @@
 
       thisProduct.renderInMenu();
       thisProduct.getElements();
+
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
+
       thisProduct.initAccordion();
 
       // console.log('new Product:', thisProduct);
@@ -85,10 +89,10 @@
 
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       //console.log(thisProduct.accordionTrigger);
-      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form); // '.product__order'
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs); // 'input, select'
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton); // '[href="#add-to-cart"]'
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem); // '.product__total-price .price'
     }
 
     initAccordion(){
@@ -117,6 +121,31 @@
         }
         /* END: click event listener to trigger */
       });
+    }
+
+    initOrderForm(){
+      const thisProduct = this;
+      // console.log('initOrderForm');
+      thisProduct.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+      for(let input of thisProduct.formInputs){
+        input.addEventListener('change', function(){
+          thisProduct.processOrder();
+        });
+      }
+
+      thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+    }
+
+    processOrder(){
+      const thisProduct = this;
+      console.log('processOrder');
     }
   }
 
