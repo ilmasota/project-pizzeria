@@ -145,7 +145,46 @@
 
     processOrder(){
       const thisProduct = this;
-      console.log('processOrder');
+      /* const formData - creating objects that are default */
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      //console.log('formData', formData);
+
+      /* const price for default price */
+      let price = thisProduct.data.price;
+      //console.log(price);
+
+      /* LOOP for each param in params */
+      for(let paramId in thisProduct.data.params){
+        // console.log(paramId);
+        const param = thisProduct.data.params[paramId];
+        //console.log(param);
+
+        /* LOOP for each optionID in param.options */
+        for(let optionId in param.options){
+          //console.log(optionID);
+          const option = param.options[optionId];
+          //console.log(option);
+          //console.log(option.price);
+
+          const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+          /* START IF: if option is selected and option is not default */
+          if(optionSelected && !option.default){
+            /* add price of option to variable price */
+            price += option.price;
+            /* END IF: if option is selected and option is not default */
+            /* START ELSE IF: if option is not selected and option is default */
+          } else if(!optionSelected && option.default){
+            /* deduct price of option from price */
+            price -= option.price;
+            /* END ELSE IF: if option is not selected and option is default */
+          }
+          /* end LOOP for each optionID */
+        }
+        /* end LOOP for each paramID */
+      }
+      /* set the contents of thisProduct.priceElem to be the value of variable price */
+      console.log(thisProduct.priceElem);
+      thisProduct.priceElem.innerHTML = price;
     }
   }
 
