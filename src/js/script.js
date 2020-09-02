@@ -60,6 +60,7 @@
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
+      thisProduct.getElements();
       thisProduct.initAccordion();
 
       // console.log('new Product:', thisProduct);
@@ -79,12 +80,23 @@
       menuContainer.appendChild(thisProduct.element);
     }
 
+    getElements(){
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      //console.log(thisProduct.accordionTrigger);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    }
+
     initAccordion(){
       const thisProduct = this;
-      console.log(thisProduct);
+      //console.log(thisProduct);
       /* find the clickable trigger (the element that should react to clicking) */
-      const accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-      console.log(accordionTrigger);
+      const accordionTrigger = thisProduct.accordionTrigger;
+      //console.log(accordionTrigger);
       /* START: click event listener to trigger */
       accordionTrigger.addEventListener('click', function(){
         /* prevent default action for event */
