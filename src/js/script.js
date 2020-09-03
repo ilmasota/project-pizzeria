@@ -93,6 +93,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs); // 'input, select'
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton); // '[href="#add-to-cart"]'
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem); // '.product__total-price .price'
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
