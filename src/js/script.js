@@ -303,6 +303,35 @@
     }
   }
 
+  class Cart{
+    constructor(element){
+      const thisCart = this;
+
+      // to keep products of the cart
+      thisCart.products = [];
+
+      thisCart.getElements(element);
+      thisCart.initActions();
+    }
+
+    getElements(element){
+      const thisCart = this;
+
+      //all DOm elements found in cart component
+      thisCart.dom = {};
+      thisCart.dom.wrapper = element;
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+    }
+
+    initActions(){
+      const thisCart = this;
+
+      thisCart.dom.toggleTrigger.addEventListener('click', function(){
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+      });
+    }
+  }
+
   const app = {
     initMenu: function(){
       const thisApp = this;
@@ -319,6 +348,12 @@
       thisApp.data = dataSource;
     },
 
+    initCart: function(){
+      const thisApp = this;
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem); // -> outside of this function instance of cart can be called as "app.cart"
+    },
+
     init: function(){
       const thisApp = this;
       // console.log('*** App starting ***');
@@ -327,8 +362,10 @@
       //console.log('settings:', settings);
       //console.log('templates:', templates);
 
+      thisApp.initCart();
       thisApp.initData();
       thisApp.initMenu();
+
     },
   };
 
