@@ -415,9 +415,9 @@
         }
       }
 
-      console.log(thisCart.totalNumber);
-      console.log(thisCart.subtotalPrice);
-      console.log(thisCart.totalPrice);
+      //console.log(thisCart.totalNumber);
+      //console.log(thisCart.subtotalPrice);
+      //console.log(thisCart.totalPrice);
 
     }
 
@@ -490,7 +490,7 @@
       });
 
       thisCartProduct.dom.wrapper.dispatchEvent(event);
-      console.log('I was removed!');
+      //console.log('I was removed!');
     }
 
     initActions(){
