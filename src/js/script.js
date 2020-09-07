@@ -336,6 +336,7 @@
 
       // keeping cart products in list
       thisCart.products = [];
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
 
       thisCart.getElements(element);
       thisCart.initActions();
@@ -373,9 +374,30 @@
       thisCart.dom.productList.appendChild(generatedDOM);
 
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-      console.log('thisCart.products', thisCart.products);
+      //console.log('thisCart.products', thisCart.products);
 
-      console.log('adding product', menuProduct);
+      //console.log('adding product', menuProduct);
+
+      thisCart.update();
+    }
+
+    update(){
+      const thisCart = this;
+
+      thisCart.totalNumber = 0;
+      thisCart.subTotalPrice = 0;
+
+      for(let thisCartProduct of thisCart.products){
+        thisCart.subTotalPrice += thisCartProduct.price;
+        thisCart.totalNumber += thisCartProduct.amount;
+      }
+
+      thisCart.totalPrice = thisCart.subTotalPrice + thisCart.deliveryFee;
+
+      console.log(thisCart.totalNumber);
+      console.log(thisCart.subTotalPrice);
+      console.log(thisCart.totalPrice);
+
     }
 
   }
@@ -389,7 +411,6 @@
       thisCartProduct.price = menuProduct.price;
       thisCartProduct.priceSingle = menuProduct.priceSingle;
       thisCartProduct.amount = menuProduct.amount;
-
       thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
 
       thisCartProduct.getElements(element);
