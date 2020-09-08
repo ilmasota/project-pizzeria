@@ -453,8 +453,8 @@
       const url = settings.db.url + '/' + settings.db.order;
 
       const payload = {
-        phone: thisCart.phone,
-        address: thisCart.address,
+        phone: thisCart.dom.phone.value,
+        address: thisCart.dom.address.value,
         totalNumber: thisCart.totalNumber,
         subtotalPrice: thisCart.subtotalPrice,
         totalPrice: thisCart.totalPrice,
