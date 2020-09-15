@@ -29,8 +29,8 @@ class DatePicker extends BaseWidget{
       onChange: function(dateStr) {
         //console.log(new Date(dateStr));
         //thisWidget.value = new Date(dateStr);
-        thisWidget.value = dateStr;
-        console.log(thisWidget.value);
+        thisWidget.value = utils.dateToStr(dateStr[0]);
+        //console.log(thisWidget.value);
       },
       'disable': [
         function(date) {
@@ -49,7 +49,7 @@ class DatePicker extends BaseWidget{
   }
 
   isValid(value){
-    return value == value;
+    return value==value;
   }
 
   renderValue(){

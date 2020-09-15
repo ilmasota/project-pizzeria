@@ -11,6 +11,7 @@ class Booking {
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.bookTableByClicking();
   }
 
   getData(){
@@ -117,7 +118,7 @@ class Booking {
     console.log(thisBooking.date);
     console.log(thisBooking.booked[thisBooking.date]);
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
-    console.log(thisBooking.hour);
+    //console.log(thisBooking.hour);
 
     let allAvailable = false;
 
@@ -142,10 +143,11 @@ class Booking {
       &&
       thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){
-        console.log('hello');
+        console.log('hello, I am in your if');
         table.classList.add(classNames.booking.tableBooked);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
+        table.classList.remove('reserved');
       }
     }
   }
@@ -189,9 +191,28 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
-      console.log('updated');
+      //console.log('updated');
     });
   }
+
+  bookTableByClicking(){
+    const thisBooking = this;
+
+    /* eventListener for clicking on one of the tables */
+    for(let table of thisBooking.dom.tables){
+      table.addEventListener('click', function(){
+        if(!(table.classList.contains(classNames.booking.tableBooked))){
+          table.classList.toggle('reserved');
+        }
+      });
+    }
+
+  }
+
+  sendBooking(){
+    
+  }
+
 }
 
 export default Booking;
