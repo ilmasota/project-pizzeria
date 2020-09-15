@@ -68,6 +68,7 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.booked = {};
+    //console.log(thisBooking.booked);
 
     for(let item of bookings){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -86,9 +87,7 @@ class Booking {
           thisBooking.makeBooked(utils.dateToStr(loopDate), item.hour, item.duration, item.table);
         }
       }
-
     }
-
     //console.log('thisBooking.booked', thisBooking.booked);
 
     thisBooking.updateDOM();
@@ -111,23 +110,26 @@ class Booking {
     }
   }
 
-  updateDOM() {
+  updateDOM(){
     const thisBooking = this;
 
     thisBooking.date = thisBooking.datePicker.value;
     console.log(thisBooking.date);
+    console.log(thisBooking.booked[thisBooking.date]);
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
     console.log(thisBooking.hour);
 
     let allAvailable = false;
 
-    if (
+    if(
       typeof thisBooking.booked[thisBooking.date] == 'undefined'
       ||
       typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'
-    ) {
+    ){
       allAvailable = true;
     }
+
+    //console.log(thisBooking.dom.tables);
 
     for(let table of thisBooking.dom.tables) {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
@@ -138,8 +140,9 @@ class Booking {
       if(
         !allAvailable
       &&
-      thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId) > -1
+      thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){
+        console.log('hello');
         table.classList.add(classNames.booking.tableBooked);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
@@ -158,7 +161,7 @@ class Booking {
     thisBooking.dom = {};
     /* add wrapper to thisBooking.dom */
     thisBooking.dom.wrapper = element;
-    //console.log(thisBooking.dom.wrapper);
+    console.log(thisBooking.dom.wrapper);
     /* change generatedHTML to DOM object and add it to wrapper */
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
     thisBooking.dom.wrapper.appendChild(generatedDOM);
@@ -186,6 +189,7 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
+      console.log('updated');
     });
   }
 }

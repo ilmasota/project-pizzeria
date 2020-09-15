@@ -19,7 +19,6 @@ class DatePicker extends BaseWidget{
     const thisWidget = this;
 
     thisWidget.minDate = new Date(thisWidget.value); // creating Date object with data of NOW;
-    //console.log(thisWidget.minDate);
     thisWidget.maxDate = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
     //console.log(thisWidget.maxDate);
 
@@ -28,7 +27,10 @@ class DatePicker extends BaseWidget{
       minDate: thisWidget.minDate,
       maxDate: thisWidget.maxDate,
       onChange: function(dateStr) {
+        //console.log(new Date(dateStr));
+        //thisWidget.value = new Date(dateStr);
         thisWidget.value = dateStr;
+        console.log(thisWidget.value);
       },
       'disable': [
         function(date) {
@@ -51,9 +53,9 @@ class DatePicker extends BaseWidget{
   }
 
   renderValue(){
-    const thisWidget = this;
-
-    console.log(thisWidget.value);
+    // const thisWidget = this;
+    //
+    // console.log(thisWidget.value);
   }
 }
 
