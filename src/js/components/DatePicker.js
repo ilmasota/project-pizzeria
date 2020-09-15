@@ -26,11 +26,11 @@ class DatePicker extends BaseWidget{
       defaultDate: thisWidget.minDate,
       minDate: thisWidget.minDate,
       maxDate: thisWidget.maxDate,
-      onChange: function(dateStr) {
+      onChange: function(selectedDates, dateStr) {
         //console.log(new Date(dateStr));
         //thisWidget.value = new Date(dateStr);
-        thisWidget.value = utils.dateToStr(dateStr[0]);
-        //console.log(thisWidget.value);
+        thisWidget.value = dateStr;
+        console.log(thisWidget.value);
       },
       'disable': [
         function(date) {
