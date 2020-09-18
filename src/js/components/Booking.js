@@ -150,6 +150,8 @@ class Booking {
         table.classList.remove('reserved');
       }
     }
+
+    thisBooking.updateSliderColor();
   }
 
 
@@ -163,7 +165,7 @@ class Booking {
     thisBooking.dom = {};
     /* add wrapper to thisBooking.dom */
     thisBooking.dom.wrapper = element;
-    console.log(thisBooking.dom.wrapper);
+    //console.log(thisBooking.dom.wrapper);
     /* change generatedHTML to DOM object and add it to wrapper */
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
     thisBooking.dom.wrapper.appendChild(generatedDOM);
@@ -270,6 +272,42 @@ class Booking {
       }).then(function (parsedResponse) {
         console.log(parsedResponse);
       });
+
+  }
+
+  updateSliderColor(){
+    const thisBooking = this;
+
+    const bookedHours = thisBooking.booked[thisBooking.datePicker.correctValue];
+    const sliderElement = document.querySelector('.rangeSlider');
+
+    console.log(thisBooking.booked);
+    console.log(thisBooking.date);
+    console.log(thisBooking.booked[thisBooking.date]);
+
+    let colorSlider = [];
+
+    for (let bookedHour in bookedHours){
+      const firstOfInterval = 0;
+      const secondOfInterval = (((bookedHour - 12) + .5 ) * 100) / 12;
+      if ( bookedHour < 24 ) {
+        if
+        (bookedHours[bookedHour].length <=1) {
+          colorSlider.push('/*' + bookedHour + '*/green ' + firstOfInterval + '%, green ' + secondOfInterval + '%');
+        } else if
+        (bookedHours[bookedHour].length == 2) {
+          colorSlider.push('/*' + bookedHour + '*/orange ' + firstOfInterval + '%, orange ' + secondOfInterval + '% ');
+        } else if
+        (bookedHours[bookedHour].length >= 3){
+          colorSlider.push('/*' + bookedHour + '*/red ' + firstOfInterval + '%, red ' + secondOfInterval + '%');
+        }
+      }
+    }
+
+    console.log(colorSlider);
+    colorSlider.sort();
+    const colorStr = colorSlider.join();
+    sliderElement.style.background = 'linear-gradient(to right, ' + colorStr + ')';
 
   }
 
