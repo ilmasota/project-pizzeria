@@ -23,6 +23,7 @@ const app = {
     //console.log(idFromHash);
 
     let pageMatchingHash = thisApp.pages[0].id;
+    //console.log(pageMatchingHash);
 
     for(let page of thisApp.pages){
       if(page.id == idFromHash){
@@ -56,6 +57,7 @@ const app = {
     /* add class active to matching pages, remove from non-matching */
     for(let page of thisApp.pages){
       page.classList.toggle(classNames.pages.active, page.id == pageId);
+      //console.log(page.id, pageId);
     }
 
     /* add class active to matching links, remove from non-matching */
@@ -113,6 +115,59 @@ const app = {
     });
   },
 
+  initCarousel: function(){
+    //const thisApp = this;
+
+    const review = [];
+    review[0] = {
+      title: 'amazing service!',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      author: '-Margaret Oswald'
+    };
+    review[1] ={
+      title: 'great food!',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      author: '-Margaret Thatcher'
+    };
+    review[2] ={
+      title: 'They will feed you like your grandma!',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      author: '-Margaret Grandma'
+    };
+
+    let i = 0;
+    const indicators = document.querySelectorAll('.carousel-triggers i');
+
+    function slider() {
+      const title = document.querySelector('.review-title');
+      const text = document.querySelector('.review-text');
+      const author = document.querySelector('.reviewer');
+      title.innerHTML = review[i].title;
+      text.innerHTML = review[i].text;
+      author.innerHTML = review[i].author;
+
+      for (let indicator of indicators) {
+        if (indicator.id == i + 1 ) {
+          indicator.classList.add('active');
+        } else {
+          indicator.classList.remove('active');
+        }
+      }
+
+      if(i < review.length - 1 ){
+        i++;
+      } else {
+        i=0;
+      }
+    }
+    slider();
+
+    setInterval(() => {
+      slider();
+    }, 3000);
+
+  },
+
   init: function(){
     const thisApp = this;
     // console.log('*** App starting ***');
@@ -126,6 +181,7 @@ const app = {
     thisApp.initCart();
     thisApp.initData();
     thisApp.initBooking();
+    thisApp.initCarousel();
     //thisApp.initMenu();
 
   },

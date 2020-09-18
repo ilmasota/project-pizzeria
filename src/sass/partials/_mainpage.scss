@@ -1,0 +1,284 @@
+.main-page {
+  margin: ($base-size * 3.5) auto;
+  padding: ($base-size * 6) ($base-size * 4);
+  background: $color-light;
+  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-radius: $radius;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+
+  text-transform: uppercase;
+
+  a {
+    @extend .h1;
+    color: $color-light;
+    text-decoration: none;
+    margin-right: ($base-size * 2);
+    text-align: center;
+    padding: $base-size ($base-size * 2);
+
+
+    &.active {
+      background: lighten($color-dark, 75%);
+    }
+
+  }
+
+  a[href="#main"] {
+    display: none;
+  }
+
+  .order-image {
+    display: flex;
+    margin: auto;
+    background-image: url("/images/main/pizza-1.jpg");
+    width: 300px;
+    height: 120px;
+    margin: auto;
+    border-radius: $radius;
+    position: relative;
+    transition: $transition;
+  }
+
+  .order-image .overlay {
+    position: absolute;
+    top: 70%;
+    width: 100%;
+    transition: $transition;
+    opacity: 0;
+    color: $color-light;
+    font-size: 16px;
+    text-align: center;
+    text-transform: none;
+    font-style: bold;
+  }
+  .order-image:hover {
+    padding-bottom: 15px;
+  }
+
+  .order-image:hover .overlay {
+    opacity: 1;
+    transition: $transition;
+    transform: translateY(-12px);
+  }
+
+  .booking-image {
+    display: flex;
+    margin: auto;
+    background-image: url("/images/main/pizza-2.jpg");
+    width: 300px;
+    height: 120px;
+    margin: auto;
+    border-radius: $radius;
+    position: relative;
+    transition: $transition;
+  }
+
+  .booking-image .overlay {
+    position: absolute;
+    top: 70%;
+    width: 100%;
+    transition: $transition;
+    opacity: 0;
+    color: $color-light;
+    font-size: 16px;
+    text-align: center;
+    text-transform: none;
+    font-style: bold;
+  }
+  .booking-image:hover {
+    padding-bottom: 15px;
+  }
+
+  .booking-image:hover .overlay {
+    opacity: 1;
+    transition: $transition;
+    transform: translateY(-12px);
+  }
+
+  .order-online {
+    flex: 1 0 0;
+    display: flex;
+    margin: auto;
+    padding: 0;
+  }
+
+  .order-online p{
+    margin: auto;
+  }
+
+  .book-a-table {
+    flex: 1 0 0;
+    display: flex;
+    margin: auto;
+    padding: 0;
+  }
+
+  .book-a-table p{
+    margin: auto;
+  }
+
+}
+
+.opening-hours{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  background-color: $color-main;
+  border-radius: $radius;
+  color: $color-light;
+  text-transform: uppercase;
+}
+
+.opening-hours .text-main {
+  @extend .h1;
+}
+
+.text-main {
+  margin-bottom: 0;
+  margin-top: 30px;
+}
+
+.subtext {
+  margin-top: 0;
+  margin-bottom: 26px;
+}
+
+/* Carousel */
+.carousel{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.review-img{
+  flex: 33.33%;
+}
+
+.review-img img{
+  width: 193px;
+  height: 193px;
+  object-fit: cover;
+  border-radius: $radius;
+}
+
+.carousel-reviews{
+  flex: 60%;
+}
+
+.carousel-triggers{
+  margin-top: 25px;
+  display: inline-block;
+  color: #A9A9A9;
+}
+
+.carousel-triggers i{
+  margin-right: 10px;
+}
+
+.carousel-triggers .active {
+  color: $color-dark;
+}
+
+.review-title {
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+.reviewer {
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* gallery */
+
+.gallery {
+  margin-top: 75px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-between;
+}
+
+.single-image {
+  position: relative;
+}
+
+.single-image .overlay {
+  display: flex;
+  align-content: space-around;
+  position: absolute;
+  width: 193px;
+  height: 193px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  border-radius: $radius;
+  opacity: 0;
+  transition: $transition;
+  background-color: rgba(209,198,198,0.5);
+}
+
+.single-image:hover .overlay {
+  opacity: 1;
+}
+
+.share {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.share li {
+  display: inline-block;
+}
+
+.share i {
+  font-size: 30px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  color: $color-light;
+}
+
+.share i:hover {
+  color: $color-main;
+  transition: $transition;
+}
+
+.single-image img {
+  position: relative;
+  margin-bottom: 10px;
+  width: 193px;
+  height: 193px;
+  object-fit: cover;
+  border-radius: $radius;
+  z-index: 1;
+}
+
+/* insta */
+
+.instagram a{
+  color: $color-main;
+}
+
+.instagram{
+  margin-top: 15px;
+}
