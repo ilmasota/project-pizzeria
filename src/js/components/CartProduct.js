@@ -15,9 +15,6 @@ class CartProduct{
     thisCartProduct.getElements(element);
     thisCartProduct.initAmountWidget();
     thisCartProduct.initActions();
-
-    //console.log('new product in cart: ', thisCartProduct);
-    //console.log('menuProduct:', menuProduct);
   }
 
   getElements(element){
@@ -57,7 +54,6 @@ class CartProduct{
     });
 
     thisCartProduct.dom.wrapper.dispatchEvent(event);
-    //console.log('I was removed!');
   }
 
   initActions(){

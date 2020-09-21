@@ -18,13 +18,15 @@
     <div class="container">
       <div class="header__wrapper">
         <div class="logo">
-          <h1 class="logo__title"><span>Mamma</span>Mia!</h1>
-          <h2 class="logo__subtitle">the best homemade Italian food</h2>
+          <a href="">
+            <h1 class="logo__title"><span>Mamma</span>Mia!</h1>
+            <h2 class="logo__subtitle">the best homemade Italian food</h2>
+          </a>
         </div>
 
         <div id="cart" class="cart">
           <div class="cart__summary">
-            <span class="cart__total-number">5</span>
+            <span class="cart__total-number">0</span>
             <span class="cart__total-price">Total price: $<strong>0</strong></span>
             <i class="fas fa-chevron-down"></i>
             <i class="fas fa-shopping-cart cart__icon"></i>
@@ -171,10 +173,24 @@
       </div>
     </section>
     <section id="order">
-      <div id="product-list" class="product-list container"></div>
+      <div id="product-list" class="product-list container">
+        <div class="main-nav">
+          <div class="booking-image">
+            <a href="#booking" class="book-a-table"><p>Book a table</p></a>
+            <div class="overlay">Book a table!</div>
+          </div>
+        </div>
+      </div>
     </section>
     <section id="booking">
-      <div class="booking-wrapper container"></div>
+      <div class="booking-wrapper container">
+        <div class="main-nav">
+          <div class="order-image">
+            <a href="#order" class="order-online"><p>Order online</p></a>
+            <div class="overlay">Delicious food delivered to your door</div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 

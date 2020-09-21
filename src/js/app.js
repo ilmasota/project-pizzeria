@@ -20,10 +20,8 @@ const app = {
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
 
     const idFromHash = window.location.hash.replace('#/', '');
-    //console.log(idFromHash);
 
     let pageMatchingHash = thisApp.pages[0].id;
-    //console.log(pageMatchingHash);
 
     for(let page of thisApp.pages){
       if(page.id == idFromHash){
@@ -57,7 +55,6 @@ const app = {
     /* add class active to matching pages, remove from non-matching */
     for(let page of thisApp.pages){
       page.classList.toggle(classNames.pages.active, page.id == pageId);
-      //console.log(page.id, pageId);
     }
 
     /* add class active to matching links, remove from non-matching */
@@ -72,7 +69,6 @@ const app = {
 
   initMenu: function(){
     const thisApp = this;
-    //console.log('thisApp.data:', thisApp.data);
 
     // instances of class Product
     for(let productData in thisApp.data.products){
@@ -91,7 +87,6 @@ const app = {
         return rawResponse.json();
       })
       .then(function(parsedResponse){
-        //console.log('parsedResponse', parsedResponse);
 
         /* save parsedResponse as thisApp.data.products */
         thisApp.data.products = parsedResponse;
@@ -99,8 +94,6 @@ const app = {
         /* execute initMenu() method */
         thisApp.initMenu();
       });
-
-    //console.log('thisApp.data', JSON.stringify(thisApp.data));
   },
 
   initCart: function(){
@@ -116,7 +109,6 @@ const app = {
   },
 
   initCarousel: function(){
-    //const thisApp = this;
 
     const review = [];
     review[0] = {
@@ -170,11 +162,6 @@ const app = {
 
   init: function(){
     const thisApp = this;
-    // console.log('*** App starting ***');
-    // console.log('thisApp:', thisApp);
-    // console.log('classNames:', classNames);
-    // console.log('settings:', settings);
-    // console.log('templates:', templates);
 
     thisApp.initPages();
 
@@ -182,7 +169,6 @@ const app = {
     thisApp.initData();
     thisApp.initBooking();
     thisApp.initCarousel();
-    //thisApp.initMenu();
 
   },
 };

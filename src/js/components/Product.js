@@ -17,8 +17,6 @@ class Product{
     thisProduct.processOrder();
 
     thisProduct.initAccordion();
-
-    //console.log('new Product:', thisProduct);
   }
 
   renderInMenu(){
@@ -26,7 +24,6 @@ class Product{
 
     /* generate HTML for individual product, based on template */
     const generatedHTML = templates.menuProduct(thisProduct.data);
-    // console.log(generatedHTML);
     /* generate DOM element based on product's code (utils.createElementFromHTML)*/
     thisProduct.element = utils.createDOMFromHTML(generatedHTML);
     /* find menu container on website */
@@ -39,7 +36,6 @@ class Product{
     const thisProduct = this;
 
     thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-    //console.log(thisProduct.accordionTrigger);
     thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form); // '.product__order'
     thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs); // 'input, select'
     thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton); // '[href="#add-to-cart"]'
@@ -50,10 +46,8 @@ class Product{
 
   initAccordion(){
     const thisProduct = this;
-    //console.log(thisProduct);
     /* find the clickable trigger (the element that should react to clicking) */
     const accordionTrigger = thisProduct.accordionTrigger;
-    //console.log(accordionTrigger);
     /* START: click event listener to trigger */
     accordionTrigger.addEventListener('click', function(){
       /* prevent default action for event */
@@ -78,7 +72,6 @@ class Product{
 
   initOrderForm(){
     const thisProduct = this;
-    // console.log('initOrderForm');
     thisProduct.form.addEventListener('submit', function(event){
       event.preventDefault();
       thisProduct.processOrder();
@@ -101,27 +94,20 @@ class Product{
     const thisProduct = this;
     /* const formData - creating objects that are default */
     const formData = utils.serializeFormToObject(thisProduct.form);
-    // console.log('formData', formData);
 
     /* thisProduct.params object */
     thisProduct.params = {};
 
     /* const price for default price */
     let price = thisProduct.data.price;
-    // console.log(price);
 
     /* LOOP for each param in params - iterating over parameters */
     for(let paramId in thisProduct.data.params){
-      // console.log(paramId);
       const param = thisProduct.data.params[paramId];
-      //console.log(param);
 
       /* LOOP for each optionID in param.options - iterating over options of parameters */
       for(let optionId in param.options){
-        //console.log(optionID);
         const option = param.options[optionId];
-        //console.log(option);
-        //console.log(option.price);
 
         const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
         /* START IF: if option is selected and option is not default */
@@ -161,14 +147,11 @@ class Product{
       /* end LOOP for each paramID */
     }
     /* multiply price by amount */
-    //console.log(thisProduct.priceElem);
     thisProduct.priceSingle = price;
     thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
 
     /* set the contents of thisProduct.priceElem to be the value of variable price */
     thisProduct.priceElem.innerHTML = thisProduct.price;
-
-    // console.log(thisProduct.params);
   }
 
   initAmountWidget(){
@@ -186,8 +169,6 @@ class Product{
     /* simplify const's */
     thisProduct.name = thisProduct.data.name;
     thisProduct.amount = thisProduct.amountWidget.value;
-
-    // app.cart.add(thisProduct);
 
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,

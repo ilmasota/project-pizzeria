@@ -20,15 +20,12 @@ class DatePicker extends BaseWidget{
 
     thisWidget.minDate = new Date(thisWidget.value); // creating Date object with data of NOW;
     thisWidget.maxDate = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
-    //console.log(thisWidget.maxDate);
 
     flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
       minDate: thisWidget.minDate,
       maxDate: thisWidget.maxDate,
       onChange: function(selectedDates, dateStr) {
-        //console.log(new Date(dateStr));
-        //thisWidget.value = new Date(dateStr);
         thisWidget.value = dateStr;
         console.log(thisWidget.value);
       },
@@ -53,9 +50,6 @@ class DatePicker extends BaseWidget{
   }
 
   renderValue(){
-    // const thisWidget = this;
-    //
-    // console.log(thisWidget.value);
   }
 }
 

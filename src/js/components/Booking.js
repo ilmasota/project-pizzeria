@@ -37,8 +37,6 @@ class Booking {
       ]
     };
 
-    //console.log('getData params', params);
-
     const urls = {
       booking: settings.db.url + '/' + settings.db.booking + '?' + params.booking.join('&'),
       eventsCurrent: settings.db.url + '/' + settings.db.event + '?' + params.eventsCurrent.join('&'),
@@ -70,7 +68,6 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.booked = {};
-    //console.log(thisBooking.booked);
 
     for(let item of bookings){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -90,7 +87,6 @@ class Booking {
         }
       }
     }
-    //console.log('thisBooking.booked', thisBooking.booked);
 
     thisBooking.updateDOM();
   }
@@ -116,10 +112,7 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.date = thisBooking.datePicker.value;
-    // console.log(thisBooking.date);
-    // console.log(thisBooking.booked[thisBooking.date]);
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
-    //console.log(thisBooking.hour);
 
     let allAvailable = false;
 
@@ -130,8 +123,6 @@ class Booking {
     ){
       allAvailable = true;
     }
-
-    //console.log(thisBooking.dom.tables);
 
     for(let table of thisBooking.dom.tables) {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
@@ -150,7 +141,6 @@ class Booking {
         table.classList.remove('reserved');
       }
     }
-
     thisBooking.updateSliderColor();
   }
 
@@ -160,33 +150,26 @@ class Booking {
 
     /* generate HTML from the template */
     const generatedHTML = templates.bookingWidget();
-    //console.log(generatedHTML);
     /* create empty object thisBooking.dom*/
     thisBooking.dom = {};
     /* add wrapper to thisBooking.dom */
     thisBooking.dom.wrapper = element;
-    //console.log(thisBooking.dom.wrapper);
     /* change generatedHTML to DOM object and add it to wrapper */
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
     thisBooking.dom.wrapper.appendChild(generatedDOM);
-
     /* PeopleAmount selector */
     thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.booking.peopleAmount);
-    //console.log(thisBooking.dom.peopleAmount);
     /* hoursAmount selector */
     thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
-    //console.log(thisBooking.dom.hoursAmount);
-
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
-    //console.log(thisBooking.dom.datePicker);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
-
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
     thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
     thisBooking.dom.form = thisBooking.dom.wrapper.querySelector(select.booking.form);
   }
+
   initWidgets(){
     const thisBooking = this;
 
@@ -197,7 +180,6 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
-      //console.log('updated');
     });
   }
 
@@ -209,10 +191,10 @@ class Booking {
       table.addEventListener('click', function(){
         if(!(table.classList.contains(classNames.booking.tableBooked))){
           table.classList.toggle('reserved');
+          thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
         }
       });
     }
-
   }
 
   initActions(){
@@ -236,7 +218,7 @@ class Booking {
       starters: [],
       date: thisBooking.datePicker.value,
       people: thisBooking.peopleAmount.value,
-      time: thisBooking.hourPicker.value,
+      hour: thisBooking.hourPicker.value,
       duration: thisBooking.hoursAmount.value,
       table: []
     };
@@ -272,18 +254,16 @@ class Booking {
       }).then(function (parsedResponse) {
         console.log(parsedResponse);
       });
-
+    thisBooking.getData();
   }
 
   updateSliderColor(){
     const thisBooking = this;
 
-    const bookedHours = thisBooking.booked[thisBooking.datePicker.correctValue];
+    const bookedHours = thisBooking.booked[thisBooking.datePicker.value];
     const sliderElement = document.querySelector('.rangeSlider');
 
-    console.log(thisBooking.booked);
-    console.log(thisBooking.date);
-    console.log(thisBooking.booked[thisBooking.date]);
+    console.log('bookedHours:', bookedHours);
 
     let colorSlider = [];
 
@@ -303,14 +283,10 @@ class Booking {
         }
       }
     }
-
-    console.log(colorSlider);
     colorSlider.sort();
     const colorStr = colorSlider.join();
     sliderElement.style.background = 'linear-gradient(to right, ' + colorStr + ')';
-
   }
-
 }
 
 export default Booking;
