@@ -195,6 +195,7 @@ class Booking {
         }
       });
     }
+    thisBooking.getData();
   }
 
   initActions(){
@@ -220,19 +221,19 @@ class Booking {
       people: thisBooking.peopleAmount.value,
       hour: thisBooking.hourPicker.value,
       duration: thisBooking.hoursAmount.value,
-      table: []
+      table: parseInt(thisBooking.tableId)
     };
 
-    for (let table of thisBooking.dom.tables){
-      if(table.classList.contains('reserved')){
-        let tableId = table.getAttribute(settings.booking.tableIdAttribute);
-        if (!isNaN(tableId)) {
-          tableId = parseInt(tableId);
-        }
-        payload.table.push(tableId);
-        table.classList.remove('reserved');
-      }
-    }
+    // for (let table of thisBooking.dom.tables){
+    //   if(table.classList.contains('reserved')){
+    //     let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+    //     if (!isNaN(tableId)) {
+    //       tableId = parseInt(tableId);
+    //     }
+    //     payload.table.push(tableId);
+    //     table.classList.remove('reserved');
+    //   }
+    // }
 
     for (let starter of thisBooking.dom.starters){
       if(starter.checked){
@@ -254,7 +255,6 @@ class Booking {
       }).then(function (parsedResponse) {
         console.log(parsedResponse);
       });
-    thisBooking.getData();
   }
 
   updateSliderColor(){
