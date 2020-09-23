@@ -255,6 +255,7 @@ class Booking {
       }).then(function (parsedResponse) {
         console.log(parsedResponse);
       });
+    thisBooking.getData();
   }
 
   updateSliderColor(){
