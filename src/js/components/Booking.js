@@ -254,8 +254,8 @@ class Booking {
         return response.json();
       }).then(function (parsedResponse) {
         console.log(parsedResponse);
+        thisBooking.getData();
       });
-    thisBooking.getData();
   }
 
   updateSliderColor(){
